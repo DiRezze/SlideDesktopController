@@ -16,6 +16,10 @@ namespace SlideDesktopController
             base.OnAppearing();
             CheckNetworkConnection();
         }
+        
+        private string wsPath (string localIP, int port) {
+            return $"ws://{localIP}:{port}";
+        }
 
         private void CheckNetworkConnection()
         {
@@ -25,7 +29,8 @@ namespace SlideDesktopController
 
                 if (!string.IsNullOrEmpty(ipAddress))
                 {
-                    GenerateQRCode(ipAddress);
+                    string qrCodeIp = wsPath(ipAddress, 5100);
+                    GenerateQRCode(qrCodeIp);
                 }
                 else
                 {
